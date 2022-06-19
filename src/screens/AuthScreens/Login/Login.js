@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 import styles from './style';
 import { Logo, User } from '../../../constants/images';
 
-export default function Login() {
+export default function Login({ props }) {
 
     const [email, setemail] = useState();
     const [pass, setpass] = useState();
+    const navigation = useNavigation();
 
     return (
         <ScrollView>
@@ -43,7 +45,7 @@ export default function Login() {
                     </View>
 
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('BottomTabs')}>
                         <LinearGradient colors={['#ECF0F1', '#ECF0F1', '#979A9A']}
                             style={styles.btn}>
                             <Text style={[styles.textblue, { fontSize: 22 }]}>Login</Text>
