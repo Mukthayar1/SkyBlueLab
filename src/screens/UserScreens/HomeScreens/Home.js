@@ -1,6 +1,7 @@
 import React from 'react'
 import { Logo, User } from '../../../constants/images';
-import { Text, View, TouchableOpacity, Image, FlatList, ScrollView } from 'react-native'
+import { Text, View, TouchableOpacity, Image, FlatList, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
   Delivery,
   DoctorApointment,
@@ -13,6 +14,8 @@ import {
 
 export default function Home() {
 
+  const navigation = useNavigation()
+
   const ViewsData = [
     { name: 'Sample Collection', icon: Delivery },
     { name: 'View Reports', icon: Reports },
@@ -23,7 +26,8 @@ export default function Home() {
   ]
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={{ backgroundColor: '#F2F3F4', height: 100, width: '45%', borderRadius: 10, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', margin: '2.5%' ,padding:3}}>
+    <TouchableOpacity style={{ backgroundColor: '#F2F3F4', height: 100, width: '45%', borderRadius: 10, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', margin: '2.5%' ,padding:3}}
+    onPress={()=>navigation.navigate('Reports')}>
      <Image source={item.icon} style={{height:40,width:40}} resizeMode={'contain'} />
       <Text>{item.name}</Text>
     </TouchableOpacity>
