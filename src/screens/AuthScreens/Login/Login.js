@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
-import { Text, View, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
+import { Text, View, TouchableOpacity, Image, TextInput, ScrollView, ActivityIndicator } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './style';
 import { Logo, User } from '../../../constants/images';
+import { LoginUser } from './Logining'
 
 export default function Login({ props }) {
 
     const [email, setemail] = useState();
     const [pass, setpass] = useState();
     const navigation = useNavigation();
+    const [loading, Setloading] = useState(false)
+
+
 
     return (
         <ScrollView>
@@ -45,12 +49,26 @@ export default function Login({ props }) {
                     </View>
 
 
-                    <TouchableOpacity onPress={() => navigation.navigate('BottomTabs')}>
-                        <LinearGradient colors={['#ECF0F1', '#ECF0F1', '#979A9A']}
-                            style={styles.btn}>
-                            <Text style={[styles.textblue, { fontSize: 22 }]}>Login</Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
+
+
+                    {loading == true ?
+
+                        <TouchableOpacity >
+                            <LinearGradient colors={['#ECF0F1', '#ECF0F1', '#979A9A']}
+                                style={styles.btn}>
+                              <ActivityIndicator size={'large'} color={'#2b2a7e'} animating={true}/>
+                            </LinearGradient>
+                        </TouchableOpacity>
+
+
+                        :
+                        <TouchableOpacity onPress={() => LoginUser(email, pass, navigation,Setloading)}>
+                            <LinearGradient colors={['#ECF0F1', '#ECF0F1', '#979A9A']}
+                                style={styles.btn}>
+                                <Text style={[styles.textblue, { fontSize: 22 }]}>Login</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                    }
 
                     <TouchableOpacity>
                         <LinearGradient colors={['#ECF0F1', '#ECF0F1', '#979A9A']}
