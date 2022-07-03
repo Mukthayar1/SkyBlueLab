@@ -5,7 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 
 import styles from './style';
 import { Logo, User } from '../../../constants/images';
-import { LoginUser } from './Logining'
+import { LoginUser } from './Logining';
+
+import Modal from '../../../components/AlertModal/Modal'
 
 export default function Login({ props }) {
 
@@ -49,7 +51,7 @@ export default function Login({ props }) {
                     </View>
 
 
-
+                    <Modal/>
 
                     {loading == true ?
 
@@ -70,20 +72,16 @@ export default function Login({ props }) {
                         </TouchableOpacity>
                     }
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                         <LinearGradient colors={['#ECF0F1', '#ECF0F1', '#979A9A']}
                             style={styles.btn}>
                             <Text style={[styles.textblue, { fontSize: 22 }]}>Register</Text>
                         </LinearGradient>
                     </TouchableOpacity>
-
-
                     <Text style={styles.textforgot}>Forgotten Password ?</Text>
-
-
                 </View>
-
             </View>
+           
         </ScrollView>
     )
 }
