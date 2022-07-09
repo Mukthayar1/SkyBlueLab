@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    LoginUser: false,
+    LoginUserIs: false,
     UserDetail: [],
     Token: '',
     Reports:[]
@@ -11,11 +11,11 @@ export const AppReducer = createSlice({
     name: 'Lab1',
     initialState,
     reducers: {
-        LoginUser: (state, action) => {
-            state.LoginUser = action.payload
+        LoginUserIs: (state, action) => {
+            state.LoginUserIs = action.payload
         },
         LogOutUser: (state, action) => {
-            state.LoginUser = action.payload,
+            state.LoginUserIs = action.payload,
                 state.Token = ''
         },
         UserDetail: (state, action) => {
@@ -31,5 +31,5 @@ export const AppReducer = createSlice({
 })
 
 
-export const { LoginUser, LogOutUser, UserDetail, Token, Reports, } = AppReducer.actions
+export const { LoginUserIs, LogOutUser, UserDetail, Token, Reports, } = AppReducer.actions
 export default AppReducer.reducer

@@ -18,12 +18,7 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <StatusBar translucent backgroundColor={'transparent'} barStyle={'dark-content'} />
-
-        {loading === true ?
-          <NavigationContainer />
-          :
-          <FlashScreen />}
+        <NavigationContainer />
       </PersistGate>
     </Provider>
   )

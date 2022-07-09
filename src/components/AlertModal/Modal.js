@@ -1,83 +1,81 @@
-import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import React from "react";
+import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { COLORS } from "../../constants/theme";
 
-const App = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+const App = ({ SetShow, ShowValue, Msg }) => {
+
+  console.log('ShowValue==>', ShowValue)
+
   return (
     <View style={styles.centeredView}>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
+        visible={ShowValue}
+        onRequestClose={() => { SetShow(!ShowValue) }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>{Msg}</Text>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              style={[styles.button]}
+              onPress={() => SetShow(!ShowValue)}>
+              <Text style={styles.btnText}>Okay</Text>
             </Pressable>
           </View>
         </View>
       </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   centeredView: {
+    display: 'flex',
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
   },
   modalView: {
-    margin: 20,
+    height: 150,
+    width: 250,
     backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
+    borderRadius: 10,
     alignItems: "center",
-    shadowColor: "#000",
+    // borderWidth: 2,
+    // borderColor: COLORS.blue,
+    shadowColor: COLORS.blue,
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 6,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5
+    shadowOpacity: 0.39,
+    shadowRadius: 8.30,
+
+    elevation: 13,
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
+  modalText:{
+    color:COLORS.blue,
+    marginTop:20,
+    fontWeight:'bold',
+    fontSize:20
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
+  button:{
+    position:'absolute',
+    bottom:20,
+    backgroundColor:'red',
+    padding:5,
+    width:100,
+    height:40,
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:5
   },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
+  btnText:{
+    color:'#fff',
+    fontSize:17,
+    fontWeight:'bold'
   }
+
 });
 
 export default App;

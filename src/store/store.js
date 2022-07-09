@@ -5,23 +5,23 @@ import thunk from 'redux-thunk'
 
 import AppReducer from './reducer/AppReducer';
 
+
+
 const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  blacklist: ['age'], 
+  blacklist: ['age'], //blacklisting a store attribute name, will not persist that store attribute.
 }
 
 const persistedReducer = persistReducer(persistConfig, AppReducer)
 
 const store = configureStore({
-  reducer: { persistedReducer },
+  reducer: persistedReducer ,
   middleware: [thunk]
 })
 
 const persistor = persistStore(store)
+
+
 export { store, persistor }
-
-
-
-

@@ -3,6 +3,8 @@ import { Text, View, TouchableOpacity, Image, TextInput, ScrollView, ActivityInd
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
+import { useDispatch } from 'react-redux';
+
 import styles from './style';
 import { Logo, User } from '../../../constants/images';
 import { LoginUser } from './Logining';
@@ -11,10 +13,18 @@ import Modal from '../../../components/AlertModal/Modal'
 
 export default function Login({ props }) {
 
-    const [email, setemail] = useState();
-    const [pass, setpass] = useState();
+    const [email, setemail] = useState('khanadil1000s@gmail.com');
+    const [pass, setpass] = useState('12345A');
+    const [errMsg, SetErrorMsg] = useState();
+    const [ShowError, SetShowError] = useState(false);
+    const [loading, Setloading] = useState(false);
+
     const navigation = useNavigation();
-    const [loading, Setloading] = useState(false)
+    const dispatch = useDispatch();
+
+    const LoginUserFun = () => {
+        LoginUser(email, pass, navigation, Setloading, SetErrorMsg, SetShowError,dispatch)
+    }
 
 
 
@@ -51,20 +61,20 @@ export default function Login({ props }) {
                     </View>
 
 
-                    <Modal/>
+                    <Modal SetShow={SetShowError} ShowValue={ShowError} Msg={errMsg} />
 
                     {loading == true ?
 
                         <TouchableOpacity >
                             <LinearGradient colors={['#ECF0F1', '#ECF0F1', '#979A9A']}
                                 style={styles.btn}>
-                              <ActivityIndicator size={'large'} color={'#2b2a7e'} animating={true}/>
+                                <ActivityIndicator size={'large'} color={'#2b2a7e'} animating={true} />
                             </LinearGradient>
                         </TouchableOpacity>
 
 
                         :
-                        <TouchableOpacity onPress={() => LoginUser(email, pass, navigation,Setloading)}>
+                        <TouchableOpacity onPress={() => LoginUserFun()}>
                             <LinearGradient colors={['#ECF0F1', '#ECF0F1', '#979A9A']}
                                 style={styles.btn}>
                                 <Text style={[styles.textblue, { fontSize: 22 }]}>Login</Text>
@@ -81,7 +91,7 @@ export default function Login({ props }) {
                     <Text style={styles.textforgot}>Forgotten Password ?</Text>
                 </View>
             </View>
-           
+
         </ScrollView>
     )
 }
